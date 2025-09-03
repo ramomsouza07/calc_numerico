@@ -30,7 +30,7 @@ int main() {
                 break;
             }
         }
-        printf("O valor aproximado é de: %f\n", y);        
+        printf("O valor aproximado é de: %.6f\n", y);        
     }else{
         printf("Não irá convergir\n");
     }
