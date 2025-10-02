@@ -2,12 +2,15 @@
 #include <stdlib.h>
 
 int main() {
-   float m[3][3] = {
-        {2, 1, 1},
-        {4, -6, 0},
-        {-2, 7, 2}
-    };
+    float m[3][3];
     
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            printf("Insira o valor a[%d][%d]: ", i+1, j+1);
+            scanf("%f", &m[i][j]);
+        }
+    }printf("\n");
+
     float fator;
 
     printf("Matriz Original:\n");
