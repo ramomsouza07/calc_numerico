@@ -5,8 +5,6 @@ int main() {
     int n, i, j, iter = 0, max_iter;
     float tol;
 
-    printf("=== MÉTODO DE GAUSS-JACOBI ===\n\n");
-
     // Entrada do tamanho da matriz
     printf("Digite a ordem do sistema (n): ");
     scanf("%d", &n);
@@ -20,6 +18,28 @@ int main() {
             printf("A[%d][%d]: ", i + 1, j + 1);
             scanf("%f", &A[i][j]);
         }
+    }
+
+    // Critério das linhas
+    int satisfaz = 1; // começa supondo que satisfaz
+    for (i = 0; i < n; i++) {
+        float soma = 0.0;
+        for (j = 0; j < n; j++) {
+            if (j != i)
+                soma += fabs(A[i][j]);
+        }
+
+        if (fabs(A[i][i]) <= soma) {
+            satisfaz = 0;
+            break;
+        }
+    }
+
+    if (!satisfaz) {
+        printf("\nERRO: A matriz NAO satisfaz o criterio das linhas.\n");
+        printf("Troque as linhas da matriz para tentar torná-la diagonalmente dominante.\n");
+    } else {
+        printf("\nA matriz SATISFAZ o criterio das linhas. Pode prosseguir com o metodo.\n");
     }
 
     // Entrada do vetor b
@@ -57,8 +77,9 @@ int main() {
         for (i = 0; i < n; i++) {
             float soma = 0.0;
             for (j = 0; j < n; j++) {
-                if (j != i)
+                if (j != i){
                     soma += A[i][j] * x_ant[j];
+                }
             }
             x[i] = (b[i] - soma) / A[i][i];
         }
@@ -66,8 +87,9 @@ int main() {
         // Cálculo do erro máximo
         for (i = 0; i < n; i++) {
             float dif = fabs(x[i] - x_ant[i]);
-            if (dif > erro)
+            if (dif > erro){
                 erro = dif;
+            }
         }
 
         iter++;
